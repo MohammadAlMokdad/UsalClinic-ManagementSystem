@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dashboard | Usal Clinic</title>
+    <link rel="stylesheet" href="../static/css/stylee.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Raleway"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      html,
+      body,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5 {
+        font-family: "Raleway", sans-serif;
+      }
+    </style>
+  </head>
+
+  <body class="w3-light-grey">
+    <div
+      class="w3-bar w3-top w3-black w3-large"
+      style="z-index: 4"
+      id="navbar1"
+    >
+      <button
+        class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey"
+        id="menubutton1"
+        onclick="w3_open();"
+      >
+        <i class="fa fa-bars"></i>  Menu
+      </button>
+      <img class="navLogo" src="../static/IMG/USAL CLINIC.png" />
+      <span class="w3-bar-item w3-right">
+        <button id="logoutButton" onclick="logout()">Logout</button>
+      </span>
+    </div>
+
+    <script>
+      function logout() {
+        window.location.href = "/logout";
+      }
+    </script>
+
+    <nav
+      class="w3-sidebar w3-collapse w3-white w3-animate-left"
+      style="z-index: 3; width: 300px"
+      id="mySidebar"
+    >
+      <br />
+      <div class="w3-container w3-row" id="welcomeDiv">
+        <div class="w3-col s8 w3-bar">
+          <span id="welcome">Welcome, <strong>{{logged_in_user}}</strong></span
+          ><br />
+        </div>
+      </div>
+      <hr />
+      <div class="w3-container">
+        <h5><i class="fa fa-dashboard"></i> Dashboard</h5>
+      </div>
+      <div class="w3-bar-block">
+        <a
+          href="#"
+          class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black"
+          onclick="w3_close()"
+          title="close menu"
+          ><i class="fa fa-remove fa-fw"></i>  Close Menu</a
+        >
+        <a href="#" class="w3-bar-item w3-button w3-padding w3-blue" id="homea"
+          ><i class="fa fa-home fa-fw"></i>  Home</a
+        >
+        <a href="/doctor" class="w3-bar-item w3-button w3-padding"
+          ><i class="bx bxs-capsule"></i> Doctors</a
+        >
+        <a href="/patient" class="w3-bar-item w3-button w3-padding"
+          ><i class="fa fa-users fa-fw"></i> Patients</a
+        >
+        <a href="/appointment" class="w3-bar-item w3-button w3-padding"
+          ><i class="bx bx-calendar"></i>  Appointments</a
+        >
+
+        <a
+          href="/api/specialities_rend"
+          class="w3-bar-item w3-button w3-padding"
+          ><i class="bx bxs-briefcase-alt-2"></i> Speciality</a
+        >
+        <a href="/api/medicines_rend" class="w3-bar-item w3-button w3-padding"
+          ><i class="bx bx-plus-medical"></i> Medicine</a
+        >
+        <a href="/api/insurance_rend" class="w3-bar-item w3-button w3-padding"
+          ><i class="bx bxs-bank"></i>  Insurance</a
+        >
+
+        <a
+          href="https://www.usal.edu.lb/"
+          class="w3-bar-item w3-button w3-padding"
+          target="_blank"
+          ><i class="bx bx-info-circle"></i>  About Us</a
+        >
+      </div>
+    </nav>
+
+    <div
+      class="w3-overlay w3-hide-large w3-animate-opacity"
+      onclick="w3_close()"
+      style="cursor: pointer"
+      title="close side menu"
+      id="myOverlay"
+    ></div>
+
+    <div class="w3-main" style="margin-left: 300px; margin-top: 43px">
+      <header class="w3-container" style="padding-top: 22px">
+        <h5>
+          <p>‏‏‎ ‎</p>
+        </h5>
+      </header>
+
+      <div class="w3-row-padding w3-margin-bottom">
+        <div class="w3-quarter">
+          <div class="w3-container w3-red w3-padding-16" id="block1">
+            <div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
+            <div class="w3-right">
+              <h3>{{ patients_count }}</h3>
+            </div>
+            <div class="w3-clear"></div>
+            <h4>Patients</h4>
+          </div>
+        </div>
+        <div class="w3-quarter">
+          <div class="w3-container w3-blue w3-padding-16" id="block2">
+            <div class="w3-left"><i class="bx bxs-capsule temp"></i></div>
+            <div class="w3-right">
+              <h3>{{ doctors_count }}</h3>
+            </div>
+            <div class="w3-clear"></div>
+            <h4>Doctors</h4>
+          </div>
+        </div>
+        <div class="w3-quarter">
+          <div class="w3-container w3-teal w3-padding-16" id="block3">
+            <div class="w3-left"><i class="bx bx-calendar temp"></i></div>
+            <div class="w3-right">
+              <h3>{{ appointments_count }}</h3>
+            </div>
+            <div class="w3-clear"></div>
+            <h4>Appointments</h4>
+          </div>
+        </div>
+        <div class="w3-quarter">
+          <div
+            class="w3-container w3-orange w3-text-white w3-padding-16"
+            id="block4"
+          >
+            <div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
+            <div class="w3-right">
+              <h3>{{users_count}}</h3>
+            </div>
+            <div class="w3-clear"></div>
+            <h4>Admins</h4>
+          </div>
+        </div>
+      </div>
+
+      <div class="w3-panel">
+        <div class="w3-row-padding" style="margin: 0 -16px">
+          <div class="w3-twothird" id="feeds">
+            <h5>Feeds</h5>
+            <table class="w3-table w3-striped w3-white" id="tableFeeds">
+              <tr>
+                <td><i class="fa fa-user w3-text-blue w3-large"></i></td>
+                <td>New Patients : {{ patients_count }}</td>
+              </tr>
+              <tr>
+                <td><i class="bx bxs-capsule" id="docNotification"></i></td>
+                <td>New Doctors : {{ doctors_count }}</td>
+              </tr>
+              <tr>
+                <td><i class="bx bx-calendar"></i></td>
+                <td>New Appointments : {{ appointments_count }}</td>
+              </tr>
+              <tr>
+                <td><i class="fa fa-users w3-text-yellow w3-large"></i></td>
+                <td>Anything else : everything is good</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="w3-container">
+        <h5>General Stats</h5>
+        <p>New Patients</p>
+        <div class="w3-grey">
+          <div
+            class="w3-container w3-center w3-padding w3-blue"
+            style="width: 25%"
+          >
+            +25%
+          </div>
+        </div>
+
+        <p>New Doctors</p>
+        <div class="w3-grey">
+          <div
+            class="w3-container w3-center w3-padding w3-blue"
+            style="width: 50%"
+          >
+            50%
+          </div>
+        </div>
+
+        <p>Appointments per day</p>
+        <div class="w3-grey">
+          <div
+            class="w3-container w3-center w3-padding w3-blue"
+            style="width: 75%"
+          >
+            75%
+          </div>
+        </div>
+      </div>
+      <hr />
+
+      <footer class="w3-container w3-padding-16 w3-light-grey">
+        <p>Copyright © 2024 usalclinic V4.24.0, All Rights Reserved</p>
+      </footer>
+
+    </div>
+
+    <script>
+      var mySidebar = document.getElementById("mySidebar");
+
+      var overlayBg = document.getElementById("myOverlay");
+
+      function w3_open() {
+        if (mySidebar.style.display === "block") {
+          mySidebar.style.display = "none";
+          overlayBg.style.display = "none";
+        } else {
+          mySidebar.style.display = "block";
+          overlayBg.style.display = "block";
+        }
+      }
+
+      function w3_close() {
+        mySidebar.style.display = "none";
+        overlayBg.style.display = "none";
+      }
+    </script>
+  </body>
+</html>

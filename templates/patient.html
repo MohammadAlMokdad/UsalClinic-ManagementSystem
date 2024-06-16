@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Patients Page</title>
+    <link rel="stylesheet" href="../static/CSS/styleViews.css" />
+  </head>
+
+  <body>
+    <header>
+      <nav>
+        <img
+          src="../static/IMG/USAL CLINIC.png"
+          alt="Usal Clinic Logo"
+          class="logo_img"
+        />
+        <div class="text">
+          <p>Patients</p>
+        </div>
+        <div class="nav_ul">
+          <ul>
+            <li>
+              <button
+                id="Appointments_bk_home"
+                onclick="window.location.href='/home';"
+              >
+                Home
+              </button>
+            </li>
+            <li>
+              <button
+                id="addappt_log_out"
+                onclick="window.location.href='/logout';"
+              >
+                Logout
+              </button>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <div class="View_table">
+        <button id="open_button" onclick="open_dialog()">Add Patient</button>
+        <section class="table_body">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Blood Type</th>
+                <th>Religion</th>
+                <th>Date of Birth</th>
+                <th>Nationality</th>
+                <th>Address</th>
+                <th>Phone Number</th>
+                <th>Email</th>
+                <th>Profession</th>
+                <th>Garantor Name</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for p in pt %}
+              <tr>
+                <td>{{p.id}}</td>
+                <td>{{p.name}}</td>
+                <td>{{p.gender}}</td>
+                <td>{{p.blood_type}}</td>
+                <td>{{p.religion}}</td>
+                <td>{{p.date_of_birth}}</td>
+                <td>{{p.nationality}}</td>
+                <td>{{p.address}}</td>
+                <td>{{p.phone_number}}</td>
+                <td>{{p.email}}</td>
+                <td>{{p.profession}}</td>
+                <td>{{p.garantor_name}}</td>
+                <td>
+                  <div class="action-buttons">
+                    <button onclick="window.location.href='/add_appt_on_pt/{{ p.id }}'" class="action-button">
+                      <img src="../static/IMG/add-button.png" alt="add" class="action-icon" />
+                    </button>
+                    <form action="/update_pt_button/{{ p.id }}" method="GET" class="action-button">
+                      <button type="submit" class="action-icon" id="editt">
+                        <img src="../static/IMG/Edit_img.png" alt="edit" />
+                      </button>
+                    </form>
+                    <form action="/delete_pt/{{ p.id }}" method="post" class="action-button">
+                      <button type="submit" class="action-icon">
+                        <img src="../static/IMG/delete-16.png" alt="bin" />
+                      </button>
+                    </form>
+                  </div>
+                </td>                
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </section>
+      </div>
+      <dialog class="dialog" id="dialog">
+        <form action="/add_patient" method="post">
+          <div class="big_div">
+            <div>
+              <label for="F_name" class="Labels">Full Name:</label>
+              <input
+                type="text"
+                id="F_name"
+                name="Name"
+                placeholder="Enter First Name"
+                required
+              />
+              <label for="dte_birth" class="Labels">Date of Birth:</label>
+              <input
+                type="date"
+                id="dte_birth"
+                name="dte_birth"
+                placeholder="Enter Date of Birth"
+                required
+              />
+              <label for="Gender" class="Labels">Gender:</label>
+              <select name="Gender" id="Gender" required>
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+              <label for="Address" class="Labels">Address:</label>
+              <input
+                type="text"
+                id="Address"
+                name="Address"
+                required
+                placeholder="Enter Address"
+              />
+              <label for="phn_nb" class="Labels">Phone Nb:</label>
+              <input
+                type="text"
+                id="phn_nb"
+                name="phn_nb"
+                required
+                placeholder="Enter Phone Number"
+              />
+              <label for="email" class="Labels">Email:</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                placeholder="Enter Email"
+              />
+            </div>
+            <div>
+              <label for="nationality" class="Labels">Nationality:</label>
+              <input
+                type="text"
+                id="nationality"
+                name="nationality"
+                placeholder="Enter Patient's Nationality"
+                required
+              />
+              <label for="Profession" class="Labels">Profession:</label>
+              <input
+                type="text"
+                id="Profession"
+                name="Profession"
+                placeholder="Enter Profession"
+                required
+              />
+              <label for="bld_type" class="Labels">Blood Type:</label>
+              <input
+                type="text"
+                name="bld_type"
+                id="bld_type"
+                placeholder="Enter Blood Type"
+                required
+              />
+              <label for="Religion" class="Labels">Religion:</label>
+              <input
+                type="text"
+                id="Religion"
+                name="Religion"
+                required
+                placeholder="Enter Religion"
+              />
+              <label for="Garantor_name" class="Labels">Garantor Name:</label>
+              <input
+                type="text"
+                id="Garantor_name"
+                name="Garantor_name"
+                placeholder="Enter Garantor Name if available"
+                required
+              />
+              <button type="submit" class="button_form" id="submit">Add</button>
+              <button type="reset" class="button_form">Reset</button>
+              <button
+                class="button_form"
+                id="close_button"
+                onclick="close_dialog()"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </form>
+      </dialog>
+      <script src="../static/script.JS"></script>
+    </main>
+    <footer>
+      <p>Copyright © 2024 usalclinic V4.24.0, All Rights Reserved</p>
+    </footer>
+  </body>
+</html>

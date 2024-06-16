@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Update Appointments Page</title>
+    <link rel="stylesheet" href="../static/CSS/styleViews.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <img
+          src="../static/IMG/USAL CLINIC.png"
+          alt="Usal Clinic Logo"
+          class="logo_img"
+        />
+        <div class="text">
+          <p>Update Appointment</p>
+        </div>
+        <div class="nav_ul">
+          <ul>
+            <li>
+              <button
+                id="Appointments_bk_home"
+                onclick="window.location.href='/home';"
+              >
+                Home
+              </button>
+            </li>
+            <li>
+              <button
+                id="addappt_log_out"
+                onclick="window.location.href='/logout';"
+              >
+                Logout
+              </button>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <main>
+      
+        
+      <dialog class="dialog" id="dialog" open>
+        <form action="/update_appt/{{a.id}}" method="POST">
+          <div class="big_div">
+            <div>
+              <label for="Patients_ID">Patient's ID</label>
+              <select name="patients_id" id="Patients_ID" required>
+                <option value="{{a.patient_id}}">{{a.patient_id}}</option>
+                {% for ps in pts%} {% if pt %}
+                <option value="{{pt.id}}" selected>{{pt.id}}</option>
+                {% else %}
+                <option value="{{ps.id}}">{{ps.id}}</option>
+                {% endif %} {% endfor %}
+              </select>
+              <label for="Patients_name">Patient's Name</label>
+              <input
+                type="text"
+                id="Patients_name"
+                name="patients_name"
+                value="{{a.patient_name}}"
+                placeholder="Enter Patient's name"
+                required
+              />
+              <label for="Patients_phone_nb">Patient's Phone #</label>
+              <input
+                type="text"
+                id="Patients_phone_nb"
+                name="patients_phone_nb"
+                value="{{a.patient_contact_number}}"
+                placeholder="Enter Patient's phn #"
+                required
+              />
+              <label for="Patients_email">Patient's email </label>
+              <input
+                type="text"
+                id="Patients_email"
+                name="patients_email"
+                value="{{a.patient_email}}"
+                placeholder="Enter Patient's email"
+                required
+              />
+      
+              <label for="Doctor_ID">Doctor's ID</label>
+              <select name="Doctor_ID" id="Doctor_ID" required>
+                <option value="{{a.doctor_id}}">{{a.doctor_id}}</option>
+                {% for d in dr%}
+                <option value="{{d.id}}">{{d.id}}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div>
+              <label for="doctors_name">Doctor's Name</label>
+              <input
+                type="text"
+                id="doctors_name"
+                name="doctors_name"
+                value="{{a.doctor_name}}"
+                placeholder="Enter doctor's name"
+                required
+              />
+
+              <label for="dr_phone_nb">Doctor's Phone Number</label>
+              <input
+                type="text"
+                id="dr_phone_nb"
+                name="dr_phone_nb"
+                value="{{a.doctor_contact_number}}"
+                placeholder="Enter Dr's phn #"
+                required
+              />
+
+              <label for="date">date</label>
+              <input type="date" id="date" value="{{a.appointment_date}}" name="date" required />
+
+              <button type="submit" class="button_form" id="submit">Save</button>
+              <button type="reset" class="button_form">Reset</button>
+              <button
+                class="button_form"
+                id="close_button"
+                onclick="event.preventDefault();
+                window.location.href='/appointment';"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </form>
+      </dialog>
+      <script src="../static/script.JS"></script>
+    </main>
+    <footer>
+      <p>Copyright © 2024 usalclinic V4.24.0, All Rights Reserved</p>
+    </footer>
+  </body>
+</html>

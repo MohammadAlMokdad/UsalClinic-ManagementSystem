@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upadate Doctors Page</title>
+    <link rel="stylesheet" href="../static/CSS/styleViews.css" />
+  </head>
+
+  <body>
+    <header>
+      <nav>
+        <img
+          src="../static/IMG/USAL CLINIC.png"
+          alt="Usal Clinic Logo"
+          class="logo_img"
+        />
+
+        <div class="text">
+          <p>Update Doctor</p>
+        </div>
+        <div class="nav_ul">
+          <ul>
+            <li>
+              <button
+                id="Appointments_bk_home"
+                onclick="window.location.href='/home';"
+              >
+                Home
+              </button>
+            </li>
+            <li>
+              <button
+                id="addappt_log_out"
+                onclick="window.location.href='/logout';"
+              >
+                Logout
+              </button>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <main>
+      
+    <dialog class="dialog" id="dialog" open>
+        <form action="/update_doctor/{{x.id}}" method="post">
+          <div class="big_div">
+            <div>
+              <label for="fullName">Full name</label>
+              <input
+                type="text"
+                id="fullName"
+                name="name"
+                value="{{x.name}}"
+                placeholder="Enter Dr's Fullname"
+                required 
+               
+              />
+              <label for="contactNumber">Contact number</label>
+              <input
+                type="text"
+                id="contactNumber"
+                name="contact_nb"
+                value="{{x.contact_number}}"
+                placeholder="Enter Dr's Phone Number"
+                required
+              />
+              <label for="emailAddress">Email address</label>
+              <input
+                type="text"
+                id="emailAddress"
+                name="email"
+                value="{{x.email}}"
+                placeholder="Enter Dr's Email Address"
+                required
+              />
+              <label for="address">Address</label>
+              <input
+                type="text"
+                id="address"
+                name="address"
+                value="{{x.address}}"
+                placeholder="Enter Dr's Address"
+                required
+              />
+            </div> 
+            <div>
+              <label for="speciality">Speciality</label>
+              <select name="speciality" id="speciality">
+                <option value="{{x.speciality}}">{{x.speciality}}</option>
+                {% for speciality in specialities %}
+                    <option value="{{ speciality.speciality_name}}">{{ speciality.speciality_name }}</option>
+                {% endfor %}
+              </select>
+              <label for="dte">Date of Birth</label>
+              <input
+                type="date"
+                id="dte"
+                name="dte_of_birth"
+                value="{{x.date_of_birth}}"
+                placeholder="Enter Dr's date of Date_of_Birth"
+                required
+              />
+
+              <button type="submit" class="button_form" id="submit">Save</button>
+              <button type="reset" class="button_form">Reset</button>
+            </form>
+              <button
+                class="button_form"
+                id="close_button"
+                onclick="event.preventDefault();
+                window.location.href='/doctor';"
+               
+              >
+                Back
+              </button>
+            </div>
+          </div>
+        
+      </dialog>
+    </main>
+    <footer>
+      <p>Copyright © 2024 usalclinic V4.24.0, All Rights Reserved</p>
+    </footer>
+    <script src="../static/script.JS"></script>
+    
+  </body>
+</html>
